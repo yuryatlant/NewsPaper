@@ -1,10 +1,4 @@
-python3 manage.py shell
-from rest.models import AbstractUser
-from rest.models import Author
-from rest.models import Post
-from rest.models import Category
-from rest.models import Comment
-from rest.models import PostCategory
+from rest.models import *
 user1 = AbstractUser.objects.create(username = "Виктор Сухоруков")
 user2 = AbstractUser.objects.create(username = "Данила Богров")
 author1 = Author.objects.create(raiting = 2, author = user1)
