@@ -5,8 +5,31 @@
 {% block title %}
 News
 {% endblock title %}
- 
+{% load custom_filters %} 
 <!-- В контенте на странице мы выводим сам товар, айди которого было передано в адрес -->
 {% block content %}
-<h1>{{ new }}</h1>
+<table>
+    <tr>
+        <td>
+            Название
+        </td>
+        <td>
+            Дата публикации
+        </td>
+        <td>
+            Описание
+        </td>
+    </tr>
+    <tr>
+        <td>
+            {{ new.name|filter_message }}
+        </td>
+        <td>
+            {{ new.time_creation|date:'d M Y H:I'}}
+        </td>
+        <td>
+            {{ new.description|filter_message }} <!-- дописываем специальный фильтр, чтобы ограничить количество символов до 20. Все остальные символы превратятся в многоточие. -->
+        </td>
+    </tr>
+</table>
 {% endblock content %}

@@ -14,6 +14,7 @@ class News(models.Model):
         on_delete=models.CASCADE,
         related_name='news', # все новости в категории будут доступны через поле news
     )
+    time_creation = models.DateTimeField(auto_now_add = True)
   
     def __str__(self):
         return f'{self.name.title()}: {self.description[:20]}'
