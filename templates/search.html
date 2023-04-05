@@ -9,8 +9,12 @@ News list
 <!-- В контенте на странице мы выводим все новости -->
 {% block content %}
     <h1>Количество новостей - {{ news|length }}</h1>
-    <h3> {{ value1|default_if_none:"ничего" }} </h3> <!-- Здесь, если в переменной value1 будет записано None, то выведется текст НИЧЕГО -->
     <hr>
+    <!-- Перед таблицей добавим форму для поиска -->
+    <form method="GET">
+        {{ filter.form }} <!-- Форму от фильтров Django -->
+        <input type="submit" value="Найти">
+    </form>
 
     {% if news %} <!-- Если есть новости, то выводим таблицу с ними -->
         <table>
@@ -28,9 +32,10 @@ News list
                     Категория
                 </td>
             </tr>
-        {% for new in news %} <!-- Для каждой новости будете генерироваться новая строчка, 
+        {% for new in filter.qs %} <!-- Для каждой новости будете генерироваться новая строчка, 
             т.е. новый html код. При этом сам цикл работает точно так же, как и в python. 
-            new — переменная цикла, т.е. наша новость, взятая из общего списка -->
+            new — переменная цикла, т.е. наша новость, взятая из общего списка 
+            И забираем уже отобранную по каким-то параметрам информацию -->
             <tr>
                 <td>
                     {{ new.name|filter_message }}
@@ -51,29 +56,6 @@ News list
         <h2> Новостей нет!</h2>
     {% endif %}
 
-<!-- Проверяем что поддерживается постраничный вывод -->
-{% if is_paginated %}
- 
-<!-- Если доступна предыдущая страница, то даём ссылку на неё и самую первую страницу -->
-{% if page_obj.has_previous %}
-    <a href="?page=1">First</a>
-    <a href="?page={{ page_obj.previous_page_number }}"><<<</a>
-{% endif %}
 
-<!-- Показываем только текущую страницу и ближайшие к ней, чтобы список не тянулся и не захламлял страницу -->
-{% for num in page_obj.paginator.page_range %}
-    {% if page_obj.number == num %}
-        <a>{{ num }}</a>
-    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-        <a href="?page={{ num }}">{{ num }}</a>
-    {% endif %}
-{% endfor %}
 
-<!-- Если есть следующая страница, то даём ссылку на неё и на самую последнюю страницу -->
-{% if page_obj.has_next %}
-    <a href="?page={{ page_obj.next_page_number }}">>>></a>
-    <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
-{% endif %}
-
-{% endif %}
 {% endblock content %}
