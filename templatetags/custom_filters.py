@@ -9,10 +9,11 @@ def multiply(value, arg): # первый аргумент здесь — это 
 
 @register.filter(name='filter_message')
 def filter_message(message: str):
-    variants = ['мудаков', 'твари', 'козлы', 'лошара', 'ублюдок'] # непристойные выражения
+    variants = ['мудаков', 'твари', 'козлы', 'лошара', 'ублюдок', 'дичь'] # непристойные выражения
     ln = len(variants)
     filtred_message = ''
     string = ''
+    string2 = ''
     pattern = ' ' # чем заменять непристойные выражения
     for i in message:
         string += i

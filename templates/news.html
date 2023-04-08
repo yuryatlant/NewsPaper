@@ -33,13 +33,18 @@ News list
             new — переменная цикла, т.е. наша новость, взятая из общего списка -->
             <tr>
                 <td>
+                    <a href="{% url 'new' new.id %}">{{ new.name|title|filter_message }}</a>  <!-- При нажатии на имя новости в таблице нас теперь будет перекидывать на страницу о самой новости -->
+                    <a href="{% url 'new_update' new.id %}"><u>Редактировать</u></a> <!-- добавим ссылку на редактирование товара-->
+                    <a href="{% url 'new_delete' new.id %}"><u> Удалить </u></a> <!-- добавим ссылку на удаление товара-->
+                </td>
+                <td>
                     {{ new.name|filter_message }}
                 </td>
                 <td>
                     {{ new.time_creation|date:'M d Y'}}
                 </td>
                 <td>
-                    {{ new.description|truncatechars:50|filter_message}} <!-- дописываем специальный фильтр, чтобы ограничить количество символов до 20. Все остальные символы превратятся в многоточие. -->
+                    {{ new.description|truncatechars:50|filter_message}} <!-- дописываем специальный фильтр, чтобы ограничить количество символов до 50. Все остальные символы превратятся в многоточие. -->
                 </td>
                 <td>
                     {{ new.category.name }}
@@ -50,6 +55,8 @@ News list
     {% else %}
         <h2> Новостей нет!</h2>
     {% endif %}
+
+<a href="{% url 'new_create' %}">Добавить новость</a> <br>
 
 <!-- Проверяем что поддерживается постраничный вывод -->
 {% if is_paginated %}
@@ -76,4 +83,24 @@ News list
 {% endif %}
 
 {% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    
+    <!--
+    <label for="name">Name</label>
+    <input name="name" type="text">
+ 
+    <label for="description">Description</label>
+    <input name="description" type="text">
+
+    <select name="category" size="4"> 
+    {% for category in categories %} 
+        <option value="{{ category.id }}"> {{ category.name }} </option> 
+    {% endfor %} 
+    </select> -->
+    {{ form }}
+    <input type="submit" value="Добавить товар"> 
+</form> 
+
 {% endblock content %}

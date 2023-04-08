@@ -8,6 +8,7 @@ News
 {% load custom_filters %} 
 <!-- В контенте на странице мы выводим сам товар, айди которого было передано в адрес -->
 {% block content %}
+<h2>Вы действительно хотите удалить эту новость?</h2>
 <table>
     <tr>
         <td>
@@ -32,4 +33,7 @@ News
         </td>
     </tr>
 </table>
+<form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="подтвердить"></form>
 {% endblock content %}
