@@ -57,8 +57,6 @@ News list
         <h2> Новостей нет!</h2>
     {% endif %}
 
-<a href="{% url 'new_create' %}">Добавить новость</a> <br>
-
 <!-- Проверяем что поддерживается постраничный вывод -->
 {% if is_paginated %}
  
@@ -101,7 +99,7 @@ News list
     {% endfor %} 
     </select> -->
     {{ form }}
-    <input type="submit" value="Добавить товар"> 
+    <input type="submit" value="Добавить новость"> 
 </form> 
 
 {% endblock content %}
