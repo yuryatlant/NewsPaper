@@ -52,11 +52,11 @@ class NewsDetail(DetailView):
 
 # дженерик для создания объекта. 
 class NewsCreateView(CreateView):
-    template_name = 'templates/new_create.html'
+    template_name = 'new_create.html'
     form_class = NewsForm
 
 class NewsUpdateView(UpdateView):
-    template_name = 'templates/new_create.html'
+    template_name = 'new_create.html'
     form_class = NewsForm
     # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы собираемся редактировать
     def get_object(self, **kwargs):
@@ -65,7 +65,7 @@ class NewsUpdateView(UpdateView):
 
 # дженерик для удаления новости
 class NewsDeleteView(DeleteView):
-    template_name = 'templates/new_delete.html'
+    template_name = 'new_delete.html'
     queryset = News.objects.all()
     success_url = '/news/'
 
