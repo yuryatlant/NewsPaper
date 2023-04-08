@@ -68,6 +68,7 @@ class NewsDeleteView(DeleteView):
     template_name = 'new_delete.html'
     queryset = News.objects.all()
     success_url = '/news/'
+    context_object_name = 'new_d'
 
 class NewsSearch(ListView):
     model = News  # указываем модель, объекты которой мы будем выводить

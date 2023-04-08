@@ -23,13 +23,13 @@ News
     </tr>
     <tr>
         <td>
-            {{ new.name|filter_message }}
+            {{ new_d.name|filter_message }}
         </td>
         <td>
-            {{ new.time_creation|date:'d M Y H:I'}}
+            {{ new_d.time_creation|date:'d M Y H:I'}}
         </td>
         <td>
-            {{ new.description|filter_message }} <!-- дописываем специальный фильтр, чтобы ограничить количество символов до 20. Все остальные символы превратятся в многоточие. -->
+            {{ new_d.description|filter_message }} <!-- дописываем специальный фильтр, чтобы ограничить количество символов до 20. Все остальные символы превратятся в многоточие. -->
         </td>
     </tr>
 </table>
