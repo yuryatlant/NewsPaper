@@ -9,7 +9,12 @@ from .models import News,Category
 from .filters import NewsFilter # импортируем фильтр
 from .forms import NewsForm # импортируем форму
 from datetime import datetime
- 
+
+
+#импорт для аутентификации
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
+
  
 class NewsList(ListView):
     model = News  # указываем модель, объекты которой мы будем выводить
@@ -55,7 +60,8 @@ class NewsCreateView(CreateView):
     template_name = 'new_create.html'
     form_class = NewsForm
 
-class NewsUpdateView(UpdateView):
+
+class NewsUpdateView(UpdateView,LoginRequiredMixin, TemplateView):
     template_name = 'new_create.html'
     form_class = NewsForm
     # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы собираемся редактировать

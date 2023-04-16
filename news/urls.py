@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import NewsList, NewsDetail, NewsSearch, NewsCreateView, NewsUpdateView, NewsDeleteView
-
+#from django.contrib.auth.decorators import login_required
 
  
 urlpatterns = [
@@ -11,4 +11,5 @@ urlpatterns = [
     path('new_create/<int:pk>/', NewsCreateView.as_view(), name='new_create'),
     path('new_delete/<int:pk>/', NewsDeleteView.as_view(), name='new_delete'),
     path('new_update/<int:pk>/', NewsUpdateView.as_view(), name='new_update'),
+
 ]
