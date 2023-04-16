@@ -61,7 +61,7 @@ class NewsCreateView(CreateView):
     form_class = NewsForm
 
 
-class NewsUpdateView(UpdateView,LoginRequiredMixin):
+class NewsUpdateView(LoginRequiredMixin,UpdateView):
     template_name = 'new_create.html'
     form_class = NewsForm
     # метод get_object мы используем вместо queryset, чтобы получить информацию об объекте который мы собираемся редактировать
