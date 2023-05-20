@@ -9,3 +9,4 @@ class NewsForm(ModelForm):
         fields = ['name', 'description', 'category']
 
 
+

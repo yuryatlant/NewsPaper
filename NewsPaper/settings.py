@@ -43,20 +43,23 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.flatpages',
 
+    'mailing',
+
     #'fpages',
-    'news',
+    'news.apps.NewsConfig',
     'accounts',
     'rest',
     'django_filters',
     'sign',
     'protect',
-
+    
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     # include the providers you want to enable:
     'allauth.socialaccount.providers.google',
 ]
+
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
@@ -69,7 +72,6 @@ SITE_ID=1
 ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
 
 LOGIN_URL = '/accounts/login/'
-#LOGIN_URL = 'sign/login'
 LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
@@ -166,3 +168,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_HOST = 'smtp.mail.ru' # адрес сервера Яндекс-почты для всех один и тот же
+EMAIL_PORT = 465 # порт smtp сервера тоже одинаковый
+EMAIL_HOST_USER = 'studium2002_1@mail.ru' # ваше имя пользователя, например если ваша почта user@yandex.ru, то сюда надо писать user, иными словами, это всё то что идёт до собаки
+EMAIL_HOST_PASSWORD = 'FhgG4ViSf0jv5QmivpuR' # пароль от почты
+EMAIL_USE_SSL = True 
+
+
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#SERVER_EMAIL = 'studium2002_1@mail.ru'
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

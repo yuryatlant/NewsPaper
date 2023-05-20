@@ -1,0 +1,27 @@
+{% block content %} 
+
+{% if sub %}
+<div>
+    <em>
+        Подписаться на категорию 
+        <strong> {{category}} ? </strong>
+    </em>
+    <button>
+        <a href = "{% url 'subscribe' category.id %}" > Подписаться!</a> 
+    </button>
+</div>
+{% else %}
+<div>
+    <em>
+        Отписаться от категории 
+        <strong> {{category}} ? </strong>
+    </em>
+    <button>
+        <a href = "{% url 'unsubscribe' pk=category.id %}" > Отписаться!</a> 
+    </button>
+</div>
+{% endif %}
+
+
+{% include 'news.html' %}
+{% endblock content %}
