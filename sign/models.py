@@ -32,7 +32,7 @@ class BasicSignupForm(SignupForm):
         basic_group.user_set.add(user)
         #добавили базовую категорию
         basic_category = Category.objects.get(name='Наука')
-        basic_category.subsriber.add(user)
+        basic_category.subscribers.add(user)
         return user
     
     
