@@ -5,7 +5,7 @@ from django.conf import settings
 def get_subscribers(categories):
     user_email=[]
     for user in categories.subscribers.all():
-        user.email.append(user_email)
+        user_email.append(user.email)
     return user_email
 
 
