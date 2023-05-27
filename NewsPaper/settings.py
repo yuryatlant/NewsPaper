@@ -58,14 +58,19 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     # include the providers you want to enable:
     'allauth.socialaccount.providers.google',
+
+    'django_apscheduler',
 ]
 
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a" #формат даты
+APSCHEDULER_RUN_NOW_TIMEOUT = 25 # если задача не выполняется за 25 секунд, то она автоматически снимается
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+#ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
 
 SITE_ID=1
@@ -181,5 +186,5 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 #SERVER_EMAIL = 'studium2002_1@mail.ru'
-#if DEBUG:
-#    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+if DEBUG:
+     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
