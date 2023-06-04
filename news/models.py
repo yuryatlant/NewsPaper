@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import User
+
+from django.core.cache import cache
  
 # Создаём модель новостей 
 class News(models.Model):
@@ -22,6 +24,10 @@ class News(models.Model):
     
     def get_absolute_url(self): # добавим абсолютный путь, чтобы после создания переходить на страницу новости
         return f'/news/{self.id}'
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs) # сначала вызываем метод родителя, чтобы объект сохранился
+        cache.delete(f'new-{self.pk}') # затем удаляем его из кэша, чтобы сбросить его
 
  
 #  создаём категорию, к которой будет относиться новость

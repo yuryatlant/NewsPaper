@@ -181,9 +181,17 @@ EMAIL_HOST_USER = 'studium2002_1@mail.ru' # ваше имя пользовате
 EMAIL_HOST_PASSWORD = 'FhgG4ViSf0jv5QmivpuR' # пароль от почты
 EMAIL_USE_SSL = True 
 
-
-
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#CACHE
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'cache_files'), #Кэшируемая папка
+    }
+}
+
+
 
 #SERVER_EMAIL = 'studium2002_1@mail.ru'
 if DEBUG:

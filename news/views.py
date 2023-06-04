@@ -20,6 +20,7 @@ from django.core.mail import EmailMultiAlternatives # импортируем к�
 from django.template.loader import render_to_string # импортируем функцию, которая срендерит наш html в текст
 
 from django.urls import resolve
+from django.core.cache import cache # импортируем кэш
 
 class NewsList(ListView):
     model = News  # указываем модель, объекты которой мы будем выводить
@@ -78,6 +79,16 @@ class NewsDetail(DetailView):
     model = News # модель всё та же, но мы хотим получать детали конкретной отдельной новости
     template_name = 'new.html' # название шаблона будет new.html
     context_object_name = 'new' # название объекта
+    queryset = News.objects.all()
+    def get_object(self, *args, **kwargs): # переопределяем метод получения объекта
+        obj = cache.get(f'new-{self.kwargs["pk"]}', None) # кэш очень похож на словарь, и метод get действует также. Он забирает значение по ключу, если его нет, то забирает None.
+ 
+        # если объекта нет в кэше, то получаем его и записываем в кэш
+        if not obj:
+            obj = super().get_object(queryset=self.queryset) 
+            cache.set(f'new-{self.kwargs["pk"]}', obj)
+        
+        return obj
 
 # дженерик для создания объекта. 
 class NewsCreateView(CreateView):
